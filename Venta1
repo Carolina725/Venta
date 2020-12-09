@@ -1,0 +1,119 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package carolinaguajardo;
+
+import javax.swing.JComboBox;
+
+/**
+ *
+ * @author Anilorac
+ */
+public class Venta {
+    
+    private String identifVenta;
+    private String tipoEvento;
+    private String rutComprador;
+    private boolean socio;
+    private int cantEntradas; 
+
+    public Venta(String identifVenta, String tipoEvento, String rutComprador, boolean socio, int cantEntradas) {
+        this.identifVenta = identifVenta;
+        this.tipoEvento = tipoEvento;
+        this.rutComprador = rutComprador;
+        this.socio = socio;
+        this.cantEntradas = cantEntradas;
+    }
+
+    public Venta() {
+    }
+
+    Venta(String text, JComboBox<String> cboEvento, String socio, String text0, int parseInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getIdentifVenta() {
+        return identifVenta;
+    }
+
+    public void setIdentifVenta(String identifVenta) {
+        this.identifVenta = identifVenta;
+    }
+
+    public String getTipoEvento() {
+        return tipoEvento;
+    }
+
+    public void setTipoEvento(String tipoEvento) {
+        this.tipoEvento = tipoEvento;
+    }
+
+    public String getRutComprador() {
+        return rutComprador;
+    }
+
+    public void setRutComprador(String rutComprador) {
+        this.rutComprador = rutComprador;
+    }
+
+    public boolean isSocio() {
+        return socio;
+    }
+
+    public void setSocio(boolean socio) {
+        this.socio = socio;
+    }
+
+    public int getCantEntradas() {
+        return cantEntradas;
+    }
+
+    public void setCantEntradas(int cantEntradas) {
+        this.cantEntradas = cantEntradas;
+    }
+    
+    
+    public String valorPago (int valorPago)
+    {
+        int valorEntrada=0;
+        socio=true;
+        
+        if(tipoEvento.compareToIgnoreCase("Concierto")==0)
+        {
+            valorEntrada=35000;
+            if(socio)
+            {
+                valorEntrada=(int) (valorEntrada*0.3);
+            }
+            
+        }
+        
+        if(tipoEvento.compareToIgnoreCase("Obra de Teatro")==0)
+        {
+            valorEntrada=40000;
+            if(socio)
+            {
+                valorEntrada=(int) (valorEntrada*0.3);
+            }
+            
+        }
+        
+        if(tipoEvento.compareToIgnoreCase("Stand-Up")==0)
+        {
+            valorEntrada=25000;
+            if(socio)
+            {
+                valorEntrada=(int) (valorEntrada*0.3);
+            }
+            
+        }
+      
+        valorPago=valorEntrada*cantEntradas;
+        return "Su total a pagar es $"+valorPago;
+
+    }
+   
+    
+}
