@@ -1,0 +1,70 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package carolinaguajardo;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+
+/**
+ *
+ * @author Anilorac
+ */
+public class VentaDAO {
+    public boolean ingresarVenta(Venta ven)
+    {
+        DefaultComboBoxModel value;
+        boolean ventas=false;
+        try {
+            Connection con= Conexion.getConexion();
+            String query="insert into Venta (IdentificadorVenta, tipoEvento, RutComprador,Socio,CantEntradas) values (?,?,?,?,?)";
+            
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, ven.getIdentifVenta());
+            ps.setString(2, ven.getTipoEvento());
+            ps.setString(3, ven.getRutComprador());
+            ps.setBoolean(4, ven.isSocio());
+            ps.setInt(5, ven.getCantEntradas());
+            ventas=ps.executeUpdate()==1;
+            
+            value = new DefaultComboBoxModel();
+       
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VentaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return ventas;
+    }
+    
+    public Venta buscarVenta(String identifVenta)
+    {
+        Venta ven=null;
+        try {
+            Connection con=Conexion.getConexion();
+            String query ="select * from Venta where identificadorVenta=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, identifVenta);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next())
+                ven=new Venta(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getInt(5));
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VentaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ven;
+    }
+}
