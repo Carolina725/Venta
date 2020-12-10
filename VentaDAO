@@ -21,7 +21,7 @@ public class VentaDAO {
     public boolean ingresarVenta(Venta ven)
     {
         DefaultComboBoxModel value;
-        boolean ventas=false;
+        boolean venta=false;
         try {
             Connection con= Conexion.getConexion();
             String query="insert into Venta (IdentificadorVenta, tipoEvento, RutComprador,Socio,CantEntradas) values (?,?,?,?,?)";
@@ -32,7 +32,7 @@ public class VentaDAO {
             ps.setString(3, ven.getRutComprador());
             ps.setBoolean(4, ven.isSocio());
             ps.setInt(5, ven.getCantEntradas());
-            ventas=ps.executeUpdate()==1;
+            venta=ps.executeUpdate()==1;
             
             value = new DefaultComboBoxModel();
        
@@ -44,7 +44,7 @@ public class VentaDAO {
         }
         
         
-        return ventas;
+        return venta;
     }
     
     public Venta buscarVenta(String identifVenta)
@@ -68,3 +68,4 @@ public class VentaDAO {
         return ven;
     }
 }
+
