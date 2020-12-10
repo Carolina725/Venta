@@ -29,9 +29,8 @@ public class Venta {
 
     public Venta() {
     }
-
     Venta(String text, JComboBox<String> cboEvento, String socio, String text0, int parseInt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   
     }
 
     public String getIdentifVenta() {
